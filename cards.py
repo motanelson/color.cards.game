@@ -210,13 +210,13 @@ def draw_game_over_screen():
     while r:
         clock.tick(30)
         for event in pygame.event.get():
-            if event.key == pygame.K_q:
-                 r=False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q:
+                     r=False
 
 def get_player_name_for_score():
     """Permite ao jogador introduzir o seu nome."""
-    overlay.fill((255, 255, 0))
-    screen.blit(overlay, (0, 0))
+    
     name = ""
     input_active = True
     input_rect = pygame.Rect(SCREEN_WIDTH // 2 - 150, SCREEN_HEIGHT // 2, 300, 50)
