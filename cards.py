@@ -3,7 +3,7 @@ import random
 import csv
 import time
 import sys
-
+overlay = None
 # --- 1. Configurações e Cores ---
 
 # 15 Cores VGA (sem Amarelo) e seus valores RGB e Hexadecimais
@@ -28,7 +28,7 @@ VGA_COLORS = {
 
 # Cor Amarela para o Fundo da Mesa (Board) - Cor Excluída da lista principal
 YELLOW = (255, 255, 0)
-BACKGROUND_COLOR = (40, 40, 40) # Cinzento para o resto do ecrã
+BACKGROUND_COLOR = (255, 255, 40) # Cinzento para o resto do ecrã
 
 # Constantes do Jogo
 NUM_CORES = 15
@@ -174,7 +174,7 @@ def draw_game_over_screen():
     
     # Fundo semi-transparente
     overlay = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
-    overlay.set_alpha(200)
+    
     overlay.fill((255, 255, 0))
     screen.blit(overlay, (0, 0))
 
@@ -215,6 +215,8 @@ def draw_game_over_screen():
 
 def get_player_name_for_score():
     """Permite ao jogador introduzir o seu nome."""
+    overlay.fill((255, 255, 0))
+    screen.blit(overlay, (0, 0))
     name = ""
     input_active = True
     input_rect = pygame.Rect(SCREEN_WIDTH // 2 - 150, SCREEN_HEIGHT // 2, 300, 50)
@@ -240,8 +242,8 @@ def get_player_name_for_score():
         
         # Desenha tela de fundo e input
         overlay = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
-        overlay.set_alpha(200)
-        overlay.fill((0, 0, 0))
+        
+        overlay.fill((255, 255, 0))
         screen.blit(overlay, (0, 0))
         
         prompt_text = font_message.render("Introduza o Seu Nome:", True, (255, 255, 255))
@@ -257,6 +259,7 @@ def get_player_name_for_score():
     return name.upper()
 
 def reset_game():
+    
     """Reinicia o estado do jogo."""
     global deck, current_pile, target_card, target_color_name, target_color_rgb, target_color_hex, \
            game_started, game_over, start_time, total_time, cards_collected
